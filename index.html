@@ -175,7 +175,7 @@
 
 			RebillyInstruments.on('instrument-ready', (instrument) => {
 			  const {billingAddress, _raw} = instrument;
-			  const form = document.querySelector('.rebilly-instruments');
+			  const form = document.querySelector('.rebilly-instruments-content');
 			  form.innerHTML = `
 			    <h1 class="rebilly-instruments-h1">Thanks, ${billingAddress.firstName} ${billingAddress.lastName} please confirm your purchase</h1>
 			    <h2 class="rebilly-instruments-h2">${_raw.paymentInstrument?.type || ' '} ${_raw.paymentInstrument.brand} ****** ${_raw.paymentInstrument?.last4}</h2>
