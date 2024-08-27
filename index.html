@@ -82,7 +82,13 @@
 			    colorBackground: '#291711', // Website background color
 			    buttonColorText: '#ffffff',
 			    fontFamily: 'Trebuchet MS, sans-serif' // Website font family
-			  }
+			  },
+			  addons: [
+			    {
+			      planId: 'planning-service',
+			      quantity: 1
+			    },
+			  ],
 			});
 			// Optional
 			RebillyInstruments.on('instrument-ready', (instrument) => {
