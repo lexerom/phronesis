@@ -190,6 +190,7 @@
 			  	const agree = document.querySelector('#confirmation-terms');
 
 			  	if (agree.checked) {
+					form.innerHTML = '<div data-rebilly-instruments="form"></div>';
 			  		RebillyInstruments.show('confirmation', instrument);
 				} else {
 					document.querySelector('#confirmation-terms-error').innerHTML = 'Please agree with terms and conditions';	
