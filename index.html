@@ -64,7 +64,7 @@
 			.period-switch .period-toggle {
 				position: relative;
 				display: inline-block;
-				border-radius: 100%;
+				border-radius: 10px;
 				width: 28pt;
 				height: 14pt;
 				border: 1px solid rgba(255,255,255,0.25);
@@ -77,13 +77,13 @@
 				left: 0;
 				width: 14pt;
 				height: 14pt;
+				border-radius: 100%;;
 				background-color: #5FBB97;
 				transition: all .3s ease-in-out;
 			}
 
 			.period-switch input[type="checkbox"]:checked ~ .period-toggle::before {
-				left: unset;
-				right: 0;
+				left: 0;
 			}
 		</style>
 	</head>
@@ -92,7 +92,7 @@
 			<div class="period-switch">
 				<input type="checkbox" name="period-yearly" id="period-yearly">
 				Monthly
-				<label for="period-yearly" class="period-toggle"></div>
+				<label for="period-yearly" class="period-toggle"></label>
 				Yearly
 			</div>
 			<div class="rebilly-instruments-summary"></div>
@@ -123,50 +123,44 @@
 			};
 			const configVariants = {
 				'monthly': {
-					name: 'Monthly',
-					config: {
-						items: [
-							{
-								planId: 'premium-membership-monthly',
-								quantity: 1,
-							},
-						],
-						bumpOffer: [
-							{
-								planId: 'platinum-membership-monthly',
-								quantity: 1,
-							},
-						],
-						addons: [
-							{
-								planId: 'planning-service',
-								quantity: 1,
-							},
-						],
-					},
+					items: [
+						{
+							planId: 'premium-membership-monthly',
+							quantity: 1,
+						},
+					],
+					bumpOffer: [
+						{
+							planId: 'platinum-membership-monthly',
+							quantity: 1,
+						},
+					],
+					addons: [
+						{
+							planId: 'planning-service',
+							quantity: 1,
+						},
+					],
 				},
 				'yearly': {
-					name: 'Yearly',
-					config: {
-						items: [
-							{
-								planId: 'premium-membership-yearly',
-								quantity: 1,
-							},
-						],
-						bumpOffer: [
-							{
-								planId: 'platinum-membership-yearly',
-								quantity: 1,
-							},
-						],
-						addons: [
-							{
-								planId: 'planning-service',
-								quantity: 1,
-							},
-						],
-					},
+					items: [
+						{
+							planId: 'premium-membership-yearly',
+							quantity: 1,
+						},
+					],
+					bumpOffer: [
+						{
+							planId: 'platinum-membership-yearly',
+							quantity: 1,
+						},
+					],
+					addons: [
+						{
+							planId: 'planning-service',
+							quantity: 1,
+						},
+					],
 				},
 			};
 			
@@ -184,6 +178,10 @@
 			});
 			RebillyInstruments.on("setup-completed", (setup) => {
 			  console.info("setup-completed", setup);
+			});
+
+			document.getElementById('period-yearly').addEventListener('change', (element) => {
+				RebillyInstruments.update(configVariants[element.checked ? 'yearly' : 'monthly'])
 			});
     	</script>
 	</body>
