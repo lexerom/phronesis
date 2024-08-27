@@ -83,7 +83,7 @@
 			}
 
 			.period-switch input[type="checkbox"]:checked ~ .period-toggle::before {
-				left: 0;
+				left: 18px;
 			}
 		</style>
 	</head>
@@ -206,8 +206,8 @@
 			  console.info("setup-completed", setup);
 			});
 
-			document.getElementById('period-yearly').addEventListener('change', (element) => {
-				RebillyInstruments.update(configVariants[element.checked ? 'yearly' : 'monthly'])
+			document.getElementById('period-yearly').addEventListener('change', (event) => {
+				RebillyInstruments.update(configVariants[event.target.checked ? 'yearly' : 'monthly']);
 			});
     	</script>
 	</body>
