@@ -101,25 +101,34 @@
 	    </div>
     	<script type="text/javascript">
 			const commonConfig = {
-			  publishableKey: 'pk_sandbox_5tKTVcM5uEcuYwvjgpMFjstxwuoxHwByheBApnN',
-			  organizationId: 'phronesis-oceanic-getaway',
-			  websiteId: 'pronesis-oceanic-getaway.com',
-			  apiMode: 'sandbox',
-			  paymentInstruments: {
-				address: {
-				  name: 'combined',
-				  region: 'split',
-				  show: ['email', 'phoneNumber', 'city', 'country']
-				}
-			  },
-			  theme: {
-			    colorPrimary: '#5FBB97', // Brand color
-			    colorText: '#ffffff',
-			    colorDanger: '#cd5c5c',
-			    colorBackground: '#291711', // Website background color
-			    buttonColorText: '#ffffff',
-			    fontFamily: 'Trebuchet MS, sans-serif' // Website font family
-			  },
+				publishableKey: 'pk_sandbox_5tKTVcM5uEcuYwvjgpMFjstxwuoxHwByheBApnN',
+				organizationId: 'phronesis-oceanic-getaway',
+				websiteId: 'pronesis-oceanic-getaway.com',
+				apiMode: 'sandbox',
+				paymentInstruments: {
+					address: {
+						name: 'combined',
+						region: 'split',
+						show: ['email', 'phoneNumber', 'city', 'country']
+					}
+				},
+				theme: {
+					colorPrimary: '#5FBB97', // Brand color
+					colorText: '#ffffff',
+					colorDanger: '#cd5c5c',
+					colorBackground: '#291711', // Website background color
+					buttonColorText: '#ffffff',
+					fontFamily: 'Trebuchet MS, sans-serif' // Website font family
+				},
+				i18n: {
+					en: {
+						form: {
+							bumpOffer: {
+								title: 'Upgrade to Platinum!',
+							},
+						},
+					},
+				},
 			};
 			const configVariants = {
 				'monthly': {
@@ -165,29 +174,29 @@
 			};
 
 			RebillyInstruments.on('instrument-ready', (instrument) => {
-			  const {billingAddress, _raw} = instrument;
-			  const form = document.querySelector('.rebilly-instruments');
-			  form.innerHTML = `
-			    <h1 class="rebilly-instruments-h1">Thanks, ${billingAddress.firstName} ${billingAddress.lastName} please confirm your purchase</h1>
-			    <h2 class="rebilly-instruments-h2">${_raw.paymentInstrument?.type || ' '} ${_raw.paymentInstrument.brand} ****** ${_raw.paymentInstrument?.last4}</h2>
-			    <button id="confirm">Confirm</button>
-			  `;
+				const {billingAddress, _raw} = instrument;
+				const form = document.querySelector('.rebilly-instruments');
+				form.innerHTML = `
+					<h1 class="rebilly-instruments-h1">Thanks, ${billingAddress.firstName} ${billingAddress.lastName} please confirm your purchase</h1>
+					<h2 class="rebilly-instruments-h2">${_raw.paymentInstrument?.type || ' '} ${_raw.paymentInstrument.brand} ****** ${_raw.paymentInstrument?.last4}</h2>
+					<button id="confirm">Confirm</button>
+				`;
 
-			  const confirm = document.querySelector('#confirm');
-			  confirm.addEventListener('click', makePurchase);
+				const confirm = document.querySelector('#confirm');
+				confirm.addEventListener('click', makePurchase);
 
-			  async function makePurchase() {
-			    try {
-			      confirm.disabled = true;
-			      confirm.innerText = 'Loading...';
-			      await RebillyInstruments.purchase(instrument);
-			    } catch (err) {
-			      console.log(err)
-			    } finally {
-			      confirm.disabled = false;
-			      confirm.innerText = 'Confirm';
-			    }
-			  }
+				async function makePurchase() {
+					try {
+						confirm.disabled = true;
+						confirm.innerText = 'Loading...';
+						await RebillyInstruments.purchase(instrument);
+					} catch (err) {
+						console.log(err)
+					} finally {
+						confirm.disabled = false;
+						confirm.innerText = 'Confirm';
+					}
+				}
 			});
 			
     		// Mount Rebilly Instruments
@@ -197,13 +206,13 @@
 			});
 			// Optional
 			RebillyInstruments.on('instrument-ready', (instrument) => {
-			  console.info('instrument-ready', instrument);
+				console.info('instrument-ready', instrument);
 			});
 			RebillyInstruments.on('purchase-completed', (purchase) => {
-			  console.info('purchase-completed', purchase);
+				console.info('purchase-completed', purchase);
 			});
 			RebillyInstruments.on("setup-completed", (setup) => {
-			  console.info("setup-completed", setup);
+				console.info("setup-completed", setup);
 			});
 
 			document.getElementById('period-yearly').addEventListener('change', (event) => {
