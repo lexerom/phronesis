@@ -54,6 +54,7 @@
 		<div class="form-wrapper">
 			<div class="rebilly-instruments-summary"></div>
 	    	<div class="rebilly-instruments"></div>
+	    	<label>Agree with privacy settings<input type="checkbox" id="confirmation-privacy" /></label>
 	    </div>
     	<script type="text/javascript">
     		// Mount Rebilly Instruments
@@ -102,6 +103,9 @@
 			});
 			RebillyInstruments.on('purchase-completed', (purchase) => {
 			  console.info('purchase-completed', purchase);
+			});
+			RebillyInstruments.on("setup-completed", (setup) => {
+			  console.info("setup-completed", setup);
 			});
     	</script>
 	</body>
