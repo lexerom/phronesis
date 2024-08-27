@@ -175,7 +175,7 @@
 
 			RebillyInstruments.on('instrument-ready', (instrument) => {
 			  const {billingAddress, _raw} = instrument;
-			  const form = document.querySelector('.rebilly-instruments-content');
+			  const form = document.querySelector('[data-rebilly-instruments="form"]');
 			  form.innerHTML = `
 			    <h1 class="rebilly-instruments-h1">Thanks, ${billingAddress.firstName} ${billingAddress.lastName} please confirm your purchase</h1>
 			    <h2 class="rebilly-instruments-h2">${_raw.paymentInstrument?.type || ' '} ${_raw.paymentInstrument.brand} ****** ${_raw.paymentInstrument?.last4}</h2>
@@ -190,7 +190,6 @@
 			  	const agree = document.querySelector('#confirmation-terms');
 
 			  	if (agree.checked) {
-					form.innerHTML = '<div data-rebilly-instruments="form"></div>';
 			  		RebillyInstruments.show('confirmation', instrument);
 				} else {
 					document.querySelector('#confirmation-terms-error').innerHTML = 'Please agree with terms and conditions';	
