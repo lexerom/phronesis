@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Invoices</title>
+    <script src="https://cdn.rebilly.com/instruments/@latest/core.js" type="text/javascript"></script>
+    <script src="client.js" defer></script>
+</head>
+
+<body>
+    <section>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Issue date</th>
+                    <th>Status</th>
+                    <th>Amount due</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="invoice__container"></tbody>
+        </table>
+    </section>
+    <div id="app">
+        <div class="rebilly-instruments-summary"></div>
+        <div class="rebilly-instruments"></div>
+    </div>
+</body>
+
+</html>
