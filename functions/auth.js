@@ -2,6 +2,7 @@ const RebillyAPI = require("rebilly-js-sdk").default;
 require("dotenv").config();
 
 const REBILLY_API_SECRET_KEY = process.env.API_KEY;
+const REBILLY_WEBSITE_ID = process.env.WEBSITE_ID;
 const REBILLY_ORGANIZATION_ID = process.env.ORG_ID;
 const CUSTOMER_ID = "cus_01J75YWQJ1MB7RDY74WT324C14";
 const rebilly = RebillyAPI({
