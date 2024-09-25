@@ -1,5 +1,5 @@
 async function payForInvoice(invoiceId) {
-  const { token: jwt } = await fetch("/authenticate", {
+  const { token: jwt } = await fetch("/.netlify/functions/auth", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -15,7 +15,7 @@ async function payForInvoice(invoiceId) {
 }
 
 async function init() {
-  const invoices = await fetch("/invoices").then((res) => res.json());
+  const invoices = await fetch("/.netlify/functions/invoices").then((res) => res.json());
   const invoicesContainer = document.querySelector(".invoice__container");
   for (const invoice of invoices) {
     const invoiceElement = document.createElement("tr");
