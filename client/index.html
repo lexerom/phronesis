@@ -101,12 +101,6 @@
     </div>
     <div class="rebilly-instruments-summary"></div>
     <div class="rebilly-instruments"></div>
-    <div class="rebilly-instruments-custom-confirmation display-none">
-        <h1 class="rebilly-instruments-h1">Thanks, ${billingAddress.firstName} ${billingAddress.lastName} please confirm your purchase</h1>
-        <h2 class="rebilly-instruments-h2">${_raw.paymentInstrument?.type || ' '} ${_raw.paymentInstrument.brand} ****** ${_raw.paymentInstrument?.last4}</h2>
-        <label>Agree with terms and conditions<input type="checkbox" id="confirmation-terms" /><span id="confirmation-terms-error">&nbsp;</span></label>
-        <button id="confirm">Confirm</button>
-    </div>
 </div>
 <script type="text/javascript">
     const commonConfig = {
@@ -137,10 +131,13 @@
                         title: 'Upgrade to Platinum!',
                     },
                 },
+                consentCheck: {
+                    agree: 'I have read and understood the [Terms of Service](https://www.example.com/tos) and [Privacy Policy](https://www.example.com/privacy).',
+                },
             },
         },
         features: {
-            hideConfirmation: true,
+            showConsentChecks: ['form'],
         },
     };
     const configVariants = {
@@ -185,29 +182,6 @@
             ],
         },
     };
-
-    RebillyInstruments.on('instrument-ready', (instrument) => {
-        const {billingAddress, _raw} = instrument;
-        const form = document.querySelector('[data-rebilly-instruments="form"]');
-        const confirmationScreen = document.querySelector('.rebilly-instruments-custom-confirmation');
-        form.classList.add('display-none');
-        confirmationScreen.classList.remove('display-none');
-
-        const confirm = document.querySelector('#confirm');
-        confirm.addEventListener('click', makePurchase);
-
-        async function makePurchase() {
-            const agree = document.querySelector('#confirmation-terms');
-
-            if (agree.checked) {
-                form.classList.remove('display-none');
-                confirmationScreen.classList.add('display-none');
-                RebillyInstruments.show('confirmation', instrument);
-            } else {
-                document.querySelector('#confirmation-terms-error').innerHTML = 'Please agree with terms and conditions';
-            }
-        }
-    });
 
     // Mount Rebilly Instruments
     RebillyInstruments.mount({
