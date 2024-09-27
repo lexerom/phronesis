@@ -1,28 +1,233 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <title>Invoices</title>
-        <script src="https://cdn.rebilly.com/instruments/@latest/core.js" type="text/javascript"></script>
-        <script src="client.js" defer></script>
-    </head>
-    <body>
-        <section>
-            <table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Issue date</th>
-                        <th>Status</th>
-                        <th>Amount due</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody class="invoice__container"></tbody>
-            </table>
-        </section>
-        <div id="app">
-            <div class="rebilly-instruments-summary"></div>
-            <div class="rebilly-instruments"></div>
-        </div>
-    </body>
+<head>
+    <meta charset="utf-8"/>
+    <script src="https://cdn.rebilly.com/instruments/@latest/core.js" type="text/javascript"></script>
+    <title>Phronesis 3</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <style type="text/css">
+        body, html {
+            background: #291711;
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+        }
+
+        #app {
+            font-family: Trebuchet MS, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        #app a {
+            color: #ffffff;
+        }
+
+        .form-wrapper {
+            max-width: 700px;
+            min-width: 500px;
+            box-sizing: border-box;
+            padding: 40px 0;
+            margin: 0 auto;
+        }
+
+        .form-wrapper section {
+            background: transparent;
+            box-sizing: border-box;
+            padding: 40px;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.25);
+        }
+
+        .form-wrapper section + section {
+            margin-top: 20px;
+        }
+
+        .period-switch {
+            display: flex;
+            flex-flow: row;
+            justify-content: center;
+            gap: 4pt;
+            font-size: 14pt;
+        }
+
+        .period-switch input[type="checkbox"] {
+            display: none;
+        }
+
+        .period-switch .period-toggle {
+            position: relative;
+            display: inline-block;
+            border-radius: 10px;
+            width: 28pt;
+            height: 14pt;
+            border: 1px solid rgba(255,255,255,0.25);
+        }
+
+        .period-switch .period-toggle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 14pt;
+            height: 14pt;
+            border-radius: 100%;;
+            background-color: #5FBB97;
+            transition: all .3s ease-in-out;
+        }
+
+        .period-switch input[type="checkbox"]:checked ~ .period-toggle::before {
+            left: 18px;
+        }
+
+        .display-none {
+            display: none;
+        }
+    </style>
+</head>
+<body id="app">
+<div class="form-wrapper">
+    <div class="period-switch">
+        <input type="checkbox" name="period-yearly" id="period-yearly">
+        Monthly
+        <label for="period-yearly" class="period-toggle"></label>
+        Yearly
+    </div>
+    <div class="rebilly-instruments-summary"></div>
+    <div class="rebilly-instruments"></div>
+    <div class="rebilly-instruments-custom-confirmation display-none">
+        <h1 class="rebilly-instruments-h1">Thanks, ${billingAddress.firstName} ${billingAddress.lastName} please confirm your purchase</h1>
+        <h2 class="rebilly-instruments-h2">${_raw.paymentInstrument?.type || ' '} ${_raw.paymentInstrument.brand} ****** ${_raw.paymentInstrument?.last4}</h2>
+        <label>Agree with terms and conditions<input type="checkbox" id="confirmation-terms" /><span id="confirmation-terms-error">&nbsp;</span></label>
+        <button id="confirm">Confirm</button>
+    </div>
+</div>
+<script type="text/javascript">
+    const commonConfig = {
+        publishableKey: 'pk_sandbox_5tKTVcM5uEcuYwvjgpMFjstxwuoxHwByheBApnN',
+        organizationId: 'phronesis-oceanic-getaway',
+        websiteId: 'pronesis-oceanic-getaway.com',
+        apiMode: 'sandbox',
+        paymentInstruments: {
+            address: {
+                name: 'combined',
+                region: 'split',
+                show: ['email', 'phoneNumber', 'city', 'country']
+            }
+        },
+        theme: {
+            colorPrimary: '#5FBB97', // Brand color
+            colorText: '#ffffff',
+            colorDanger: '#cd5c5c',
+            colorBackground: '#291711', // Website background color
+            buttonColorText: '#ffffff',
+            fontFamily: 'Trebuchet MS, sans-serif' // Website font family
+        },
+        locale: 'en',
+        i18n: {
+            en: {
+                form: {
+                    bumpOffer: {
+                        title: 'Upgrade to Platinum!',
+                    },
+                },
+            },
+        },
+        features: {
+            hideConfirmation: true,
+        },
+    };
+    const configVariants = {
+        'monthly': {
+            items: [
+                {
+                    planId: 'premium-membership-monthly',
+                    quantity: 1,
+                },
+            ],
+            bumpOffer: [
+                {
+                    planId: 'platinum-membership-monthly',
+                    quantity: 1,
+                },
+            ],
+            addons: [
+                {
+                    planId: 'planning-service',
+                    quantity: 1,
+                },
+            ],
+        },
+        'yearly': {
+            items: [
+                {
+                    planId: 'premium-membership-yearly',
+                    quantity: 1,
+                },
+            ],
+            bumpOffer: [
+                {
+                    planId: 'platinum-membership-yearly',
+                    quantity: 1,
+                },
+            ],
+            addons: [
+                {
+                    planId: 'planning-service',
+                    quantity: 1,
+                },
+            ],
+        },
+    };
+
+    RebillyInstruments.on('instrument-ready', (instrument) => {
+        const {billingAddress, _raw} = instrument;
+        const form = document.querySelector('[data-rebilly-instruments="form"]');
+        const confirmationScreen = document.querySelector('.rebilly-instruments-custom-confirmation');
+        form.classList.add('display-none');
+        confirmationScreen.classList.remove('display-none');
+
+        const confirm = document.querySelector('#confirm');
+        confirm.addEventListener('click', makePurchase);
+
+        async function makePurchase() {
+            const agree = document.querySelector('#confirmation-terms');
+
+            if (agree.checked) {
+                form.classList.remove('display-none');
+                confirmationScreen.classList.add('display-none');
+                RebillyInstruments.show('confirmation', instrument);
+            } else {
+                document.querySelector('#confirmation-terms-error').innerHTML = 'Please agree with terms and conditions';
+            }
+        }
+    });
+
+    // Mount Rebilly Instruments
+    RebillyInstruments.mount({
+        ...commonConfig,
+        ...configVariants['monthly'],
+    });
+    // Optional
+    RebillyInstruments.on('instrument-ready', (instrument) => {
+        console.info('instrument-ready', instrument);
+    });
+    RebillyInstruments.on('purchase-completed', (purchase) => {
+        console.info('purchase-completed', purchase);
+    });
+    RebillyInstruments.on("setup-completed", (setup) => {
+        console.info("setup-completed", setup);
+    });
+
+    document.getElementById('period-yearly').addEventListener('change', (event) => {
+        RebillyInstruments.update(configVariants[event.target.checked ? 'yearly' : 'monthly']);
+    });
+</script>
+</body>
 </html>
