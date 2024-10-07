@@ -11,8 +11,8 @@ const rebilly = RebillyAPI({
     organizationId: REBILLY_ORGANIZATION_ID,
 });
 
-exports.handler = function (event, context) {
-    const order = rebilly.subscriptions.create({
+exports.handler = async function (event, context) {
+   await rebilly.subscriptions.create({
         orderType: "one-time-order",
         customerId: CUSTOMER_ID,
         websiteId: REBILLY_WEBSITE_ID,
@@ -23,7 +23,5 @@ exports.handler = function (event, context) {
             }
         ],
         expand: 'recentInvoice'
-    });
-
-    Response.redirect(order._embedded.recentInvoice.paymentFormUrl, 303);
+    }).then((res) => Response.redirect(res._embedded.recentInvoice.paymentFormUrl, 303))
 };
