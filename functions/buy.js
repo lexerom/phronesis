@@ -13,15 +13,17 @@ const rebilly = RebillyAPI({
 
 exports.handler = async function (event, context) {
    await rebilly.subscriptions.create({
-        orderType: "one-time-order",
-        customerId: CUSTOMER_ID,
-        websiteId: REBILLY_WEBSITE_ID,
-        items: [
-            {
-                plan: 'online-course',
-                quantity: 1,
-            }
-        ],
+        data: {
+            orderType: "one-time-order",
+            customerId: CUSTOMER_ID,
+            websiteId: REBILLY_WEBSITE_ID,
+            items: [
+                {
+                    plan: 'online-course',
+                    quantity: 1,
+                }
+            ],
+        }
         expand: 'recentInvoice'
     }).then((res) => Response.redirect(res._embedded.recentInvoice.paymentFormUrl, 303))
 };
