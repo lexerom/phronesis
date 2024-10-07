@@ -3,201 +3,48 @@
 <head>
     <meta charset="utf-8"/>
     <script src="https://cdn.rebilly.com/instruments/@latest/core.js" type="text/javascript"></script>
-    <title>Phronesis 3</title>
+    <title>Phronesis 9</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="main.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <style type="text/css">
-        body, html {
-            background: #291711;
-            padding: 0;
-            margin: 0;
-        }
-
-        body {
-            display: flex;
-            justify-content: center;
-        }
-
-        #app {
-            font-family: Trebuchet MS, sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            text-align: center;
-            color: #ffffff;
-        }
-
-        #app a {
-            color: #ffffff;
-        }
-
-        .form-wrapper {
-            max-width: 700px;
-            min-width: 500px;
-            box-sizing: border-box;
-            padding: 40px 0;
-            margin: 0 auto;
-        }
-
-        .form-wrapper section {
-            background: transparent;
-            box-sizing: border-box;
-            padding: 40px;
-            border-radius: 6px;
-            border: 1px solid rgba(255,255,255,0.25);
-        }
-
-        .form-wrapper section + section {
-            margin-top: 20px;
-        }
-
-        .period-switch {
-            display: flex;
-            flex-flow: row;
-            justify-content: center;
-            gap: 4pt;
-            font-size: 14pt;
-        }
-
-        .period-switch input[type="checkbox"] {
-            display: none;
-        }
-
-        .period-switch .period-toggle {
-            position: relative;
-            display: inline-block;
-            border-radius: 10px;
-            width: 28pt;
-            height: 14pt;
-            border: 1px solid rgba(255,255,255,0.25);
-        }
-
-        .period-switch .period-toggle::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 14pt;
-            height: 14pt;
-            border-radius: 100%;;
-            background-color: #5FBB97;
-            transition: all .3s ease-in-out;
-        }
-
-        .period-switch input[type="checkbox"]:checked ~ .period-toggle::before {
-            left: 18px;
-        }
-    </style>
 </head>
-<body id="app">
-<div class="form-wrapper">
-    <div class="period-switch">
-        <input type="checkbox" name="period-yearly" id="period-yearly">
-        Monthly
-        <label for="period-yearly" class="period-toggle"></label>
-        Yearly
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="thumbnail">
+                    <img alt="" src="https://fastly.picsum.photos/id/780/200/300.jpg?hmac=Zmxf0t2fpCbfZrR5NAXA_IKAP_8P6fYe9P440jUTWag" />
+                </div>
+                <div class="name">"Start your villa rental business" online course</div>
+                <div class="price">$1,299</div>
+                <div class="book"><a href="course.html">Buy</a></div>
+            </div>
+            <div class="col">
+                <div class="thumbnail">
+                    <img alt="" src="https://fastly.picsum.photos/id/281/200/300.jpg?hmac=KCN8F5QTgxHdeQxLpZ5BOuUEVQEp8jAedlLSRERW7CY" />
+                </div>
+                <div class="name">"Why should you invest in real estate" ebook</div>
+                <div class="price">$9.99</div>
+                <div class="book"><a href="ebook.html">Buy</a></div>
+            </div>
+            <div class="col">
+                <div class="thumbnail">
+                    <img alt="" src="https://fastly.picsum.photos/id/1070/200/300.jpg?hmac=dJNTYlLwT_0RupxbJNbw5Wj-q2cCTB4Xh-GqWRofIIc" />
+                </div>
+                <div class="name">Hat</div>
+                <div class="price">$29.99</div>
+                <div class="book"><a href="hat.html">Buy</a></div>
+            </div>
+            <div class="col">
+                <div class="thumbnail">
+                    <img alt="" src="https://fastly.picsum.photos/id/912/200/300.jpg?hmac=wRzqCXn4iQFYYTjMpB_LljooIBYELbMYz8kUuWS-toc" />
+                </div>
+                <div class="name">T-shirt</div>
+                <div class="price">$19.99</div>
+                <div class="book"><a href="t-shirt.html">Buy</a></div>
+            </div>
+        </div>
     </div>
-    <div class="rebilly-instruments-summary"></div>
-    <div class="rebilly-instruments"></div>
-</div>
-<script type="text/javascript">
-    const commonConfig = {
-        publishableKey: 'pk_sandbox_5tKTVcM5uEcuYwvjgpMFjstxwuoxHwByheBApnN',
-        organizationId: 'phronesis-oceanic-getaway',
-        websiteId: 'pronesis-oceanic-getaway.com',
-        apiMode: 'sandbox',
-        paymentInstruments: {
-            address: {
-                name: 'combined',
-                region: 'split',
-                show: ['email', 'phoneNumber', 'city', 'country']
-            }
-        },
-        theme: {
-            colorPrimary: '#5FBB97', // Brand color
-            colorText: '#ffffff',
-            colorDanger: '#cd5c5c',
-            colorBackground: '#291711', // Website background color
-            buttonColorText: '#ffffff',
-            fontFamily: 'Trebuchet MS, sans-serif' // Website font family
-        },
-        locale: 'en',
-        i18n: {
-            en: {
-                form: {
-                    bumpOffer: {
-                        title: 'Upgrade to Platinum!',
-                    },
-                },
-                consentCheck: {
-                    agree: 'I have read and understood the [Terms of Service](https://www.example.com/tos) and [Privacy Policy](https://www.example.com/privacy).',
-                },
-            },
-        },
-        features: {
-            showConsentCheck: ['form'],
-        },
-    };
-    const configVariants = {
-        'monthly': {
-            items: [
-                {
-                    planId: 'premium-membership-monthly',
-                    quantity: 1,
-                },
-            ],
-            bumpOffer: [
-                {
-                    planId: 'platinum-membership-monthly',
-                    quantity: 1,
-                },
-            ],
-            addons: [
-                {
-                    planId: 'planning-service',
-                    quantity: 1,
-                },
-            ],
-        },
-        'yearly': {
-            items: [
-                {
-                    planId: 'premium-membership-yearly',
-                    quantity: 1,
-                },
-            ],
-            bumpOffer: [
-                {
-                    planId: 'platinum-membership-yearly',
-                    quantity: 1,
-                },
-            ],
-            addons: [
-                {
-                    planId: 'planning-service',
-                    quantity: 1,
-                },
-            ],
-        },
-    };
-
-    // Mount Rebilly Instruments
-    RebillyInstruments.mount({
-        ...commonConfig,
-        ...configVariants['monthly'],
-    });
-    // Optional
-    RebillyInstruments.on('instrument-ready', (instrument) => {
-        console.info('instrument-ready', instrument);
-    });
-    RebillyInstruments.on('purchase-completed', (purchase) => {
-        console.info('purchase-completed', purchase);
-    });
-    RebillyInstruments.on("setup-completed", (setup) => {
-        console.info("setup-completed", setup);
-    });
-
-    document.getElementById('period-yearly').addEventListener('change', (event) => {
-        RebillyInstruments.update(configVariants[event.target.checked ? 'yearly' : 'monthly']);
-    });
-</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
