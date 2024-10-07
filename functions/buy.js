@@ -12,29 +12,17 @@ const rebilly = RebillyAPI({
 });
 
 exports.handler = async function (event, context) {
-    try {
-        console.info(event);
-        console.info(context);
-        const order = await rebilly.subscriptions.create({
-            customerId: CUSTOMER_ID,
-            websiteId: REBILLY_WEBSITE_ID,
-            items: [
-                {
-                    plan: 'online-course',
-                    quantity: 1,
-                }
-            ],
-            expand: 'recentInvoice'
-        });
+    const order = await rebilly.subscriptions.create({
+        customerId: CUSTOMER_ID,
+        websiteId: REBILLY_WEBSITE_ID,
+        items: [
+            {
+                plan: 'online-course',
+                quantity: 1,
+            }
+        ],
+        expand: 'recentInvoice'
+    });
 
-        return {
-            statusCode: 303,
-            location: order._embedded.recentInvoice.paymentFormUrl
-        };
-    }  catch (e) {
-        return {
-            statusCode: 500,
-            body: JSON.stringify({error: e})
-        };
-    }
+    Response.redirect(order._embedded.recentInvoice.paymentFormUrl, 303);
 };
