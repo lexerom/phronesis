@@ -11,8 +11,9 @@ const rebilly = RebillyAPI({
     organizationId: REBILLY_ORGANIZATION_ID,
 });
 
-exports.handler = async function (event, context) {
-    const order = await rebilly.subscriptions.create({
+exports.handler = function (event, context) {
+    const order = rebilly.subscriptions.create({
+        orderType: "one-time-order",
         customerId: CUSTOMER_ID,
         websiteId: REBILLY_WEBSITE_ID,
         items: [
