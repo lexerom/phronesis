@@ -38,8 +38,8 @@ exports.handler = async function (event, context) {
             transaction,
         });
     } catch (error) {
-        const message = err.details ?? "Internal Server Error";
-        const code = err.status ?? 500;
+        const message = error.details ?? "Internal Server Error";
+        const code = error.status ?? 500;
 
         return JSON.stringify({
             code,
