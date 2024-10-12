@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Funnel Hacking Live Vegas</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://framepay.rebilly.com/framepay.css" rel="stylesheet">
+    <script src="https://framepay.rebilly.com/framepay.js"></script>
 </head>
 <body>
 <!-- Header -->
@@ -17,6 +19,7 @@
             <li><a href="#speakers">Speakers</a></li>
             <li><a href="#tickets">Tickets</a></li>
             <li><a href="#contact">Contact</a></li>
+            <li><a href="/debriefs">Debriefs</a></li>
         </ul>
     </nav>
 </header>
@@ -25,7 +28,12 @@
 <section id="hero">
     <h2>Join Us in Las Vegas!</h2>
     <p>The ultimate marketing event of the year.</p>
-    <button>Get Tickets Now</button>
+    <h3>Secure Your Ticket For Only $997!</h3>
+    <form id="payment-form">
+        <input data-rebilly="firstName" placeholder="First Name" />
+        <input data-rebilly="lastName" placeholder="Last Name" />
+        <div id="mounting-point"></div>
+    </form>
 </section>
 
 <!-- Countdown -->
@@ -45,5 +53,6 @@
 </footer>
 
 <script src="script.js"></script>
+<script src="framepay.js"></script>
 </body>
 </html>
