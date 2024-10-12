@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://framepay.rebilly.com/framepay.css" rel="stylesheet">
     <script src="https://framepay.rebilly.com/framepay.js"></script>
-    <script src="framepay.js"></script>
 </head>
 <body>
 <!-- Header -->
@@ -31,9 +30,18 @@
     <p>The ultimate marketing event of the year.</p>
     <h3>Secure Your Ticket For Only $997!</h3>
     <form id="payment-form">
-        <input data-rebilly="firstName" placeholder="First Name" />
-        <input data-rebilly="lastName" placeholder="Last Name" />
-        <div id="mounting-point"></div>
+        <fieldset>
+            <div class="field">
+                <input data-rebilly="firstName" placeholder="First name" />
+            </div>
+            <div class="field">
+                <input data-rebilly="lastName" placeholder="Last name" />
+            </div>
+            <div class="field">
+                <div id="mounting-point"></div>
+            </div>
+        </fieldset>
+        <button>Make payment</button>
     </form>
 </section>
 
@@ -54,5 +62,6 @@
 </footer>
 
 <script src="script.js"></script>
+<script src="framepay.js"></script>
 </body>
 </html>
