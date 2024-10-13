@@ -9,6 +9,7 @@
     <script src="https://framepay.rebilly.com/framepay.js"></script>
 </head>
 <body>
+<div class="container">
 <!-- Header -->
 <header>
     <nav>
@@ -29,25 +30,50 @@
     <h2>Join Us in Las Vegas!</h2>
     <p>The ultimate marketing event of the year.</p>
     <h3>Secure Your Ticket For Only $997!</h3>
-    <form id="payment-form">
+    <form id="payment-form" class="form">
+        <div class="error-message hidden"></div>
         <fieldset>
+            <h2>Contact information</h2>
             <div class="field">
-                <input data-rebilly="firstName" placeholder="First name" />
+                <input required data-rebilly="firstName" placeholder="First Name" />
             </div>
             <div class="field">
-                <input data-rebilly="lastName" placeholder="Last name" />
+                <input required data-rebilly="lastName" placeholder="Last Name" />
             </div>
             <div class="field">
-                <input data-rebilly="email" placeholder="Email" />
+                <input required data-rebilly="emails" placeholder="Email" />
             </div>
             <div class="field">
-                <input data-rebilly="phone" placeholder="Phone number" />
-            </div>
-            <div class="field">
-                <div id="mounting-point"></div>
+                <input required data-rebilly="phoneNumbers" placeholder="Phone Number" />
             </div>
         </fieldset>
-        <button>Make payment</button>
+        <fieldset>
+            <h2>Billing information</h2>
+            <div class="field">
+                <input required data-rebilly="address" placeholder="Address" />
+            </div>
+            <div class="field">
+                <input required data-rebilly="address2" placeholder="Address 2" />
+            </div>
+            <div class="field">
+                <input required data-rebilly="country" placeholder="Country" />
+            </div>
+            <div class="field">
+                <input required data-rebilly="state" placeholder="State" />
+            </div>
+            <div class="field">
+                <input required data-rebilly="city" placeholder="City" />
+            </div>
+            <div class="field">
+                <input required data-rebilly="postalCode" placeholder="Postal Code" />
+            </div>
+        </fieldset>
+        <div class="field">
+            <div id="mounting-point"></div>
+        </div>
+        <div class="action">
+            <button>Make Payment</button>
+        </div>
     </form>
 </section>
 
@@ -69,5 +95,6 @@
 
 <script src="script.js"></script>
 <script src="framepay.js"></script>
+</div>
 </body>
 </html>
