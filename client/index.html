@@ -35,25 +35,25 @@
         <fieldset>
             <h2>Contact information</h2>
             <div class="field">
-                <input required data-rebilly="firstName" placeholder="First Name" />
+                <input type="text" required data-rebilly="firstName" placeholder="First Name" />
             </div>
             <div class="field">
-                <input required data-rebilly="lastName" placeholder="Last Name" />
+                <input type="text" required data-rebilly="lastName" placeholder="Last Name" />
             </div>
             <div class="field">
-                <input required data-rebilly="emails" placeholder="Email" />
+                <input type="email" required data-rebilly="emails" placeholder="Email" />
             </div>
             <div class="field">
-                <input required data-rebilly="phoneNumbers" placeholder="Phone Number" />
+                <input type="text" required data-rebilly="phoneNumbers" placeholder="Phone Number" />
             </div>
         </fieldset>
         <fieldset>
             <h2>Billing information</h2>
             <div class="field">
-                <input required data-rebilly="address" placeholder="Address" />
+                <input type="text"  data-rebilly="address" placeholder="Address" />
             </div>
             <div class="field">
-                <input required data-rebilly="address2" placeholder="Address 2" />
+                <input type="text" required data-rebilly="address2" placeholder="Address 2" />
             </div>
             <div class="field">
                 <select id="country" name="country" required data-rebilly="country">
@@ -262,18 +262,61 @@
                 </select>
             </div>
             <div class="field">
-                <input required data-rebilly="state" placeholder="State" />
+                <input type="text" required data-rebilly="state" placeholder="State" />
             </div>
             <div class="field">
-                <input required data-rebilly="city" placeholder="City" />
+                <input type="text" required data-rebilly="city" placeholder="City" />
             </div>
             <div class="field">
-                <input required data-rebilly="postalCode" placeholder="Postal Code" />
+                <input type="text" required data-rebilly="postalCode" placeholder="Postal Code" />
             </div>
         </fieldset>
+        <hr />
         <div class="field">
             <div id="mounting-point"></div>
         </div>
+        <hr />
+        <div class="live-replays">
+            <label>
+                <input type="checkbox" id="live-replays" value="1" />
+                <strong>Funnel Hacking LIVE Replays $97.00</strong>
+            </label><br />
+            Get the replays for FHL10 and we'll include the replays from FHL 9.5 FREE!
+        </div>
+        <hr />
+        <div>
+            <div>
+                <label>
+                    <input type="checkbox" id="partners" value="1" />
+                    <strong>YES! Add a Partner Ticket To My Order - $697.00 per partner</strong>
+                </label>
+            </div>
+            Choose the number of partners you'd like to bring below and be sure to fill out the name and email for each partner you will be bringing.
+        </div>
+        <div id="partners-info" class="hidden">
+            <select id="number-partners">
+                <option value="1">Number of partners: 1</option>
+                <option value="2">Number of partners: 2</option>
+                <option value="3">Number of partners: 3</option>
+            </select>
+            <fieldset class="hidden partner" id="partner-1">
+                <input type="text" id="partner-1-name" placeholder="Partner #1 Full Name" />
+                <input type="text" id="partner-1-email-address" placeholder="Partner #1 Email Address" />
+            </fieldset>
+            <fieldset class="hidden partner" id="partner-2">
+                <input type="text" id="partner-2-name" placeholder="Partner #2 Full Name" />
+                <input type="text" id="partner-2-email-address" placeholder="Partner #2 Email Address" />
+            </fieldset>
+            <fieldset class="hidden partner" id="partner-3">
+                <input type="text" id="partner-3-name" placeholder="Partner #3 Full Name" />
+                <input type="text" id="partner-3-email-address" placeholder="Partner #3 Email Address" />
+            </fieldset>
+        </div>
+        <hr />
+        <div class="total">
+            <h3>Total: $<span id="total">997</span></h3>
+        </div>
+        <hr />
         <div class="action">
             <button>Make Payment</button>
         </div>

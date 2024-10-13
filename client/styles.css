@@ -27,8 +27,7 @@ nav ul li a {
 }
 
 #hero {
-    background: url('https://via.placeholder.com/1500x500') no-repeat center center/cover;
-    color: white;
+    color: #333333;
     text-align: center;
     padding: 100px 0;
 }
@@ -125,15 +124,8 @@ body {
 .form .field + .action {
     margin-top: 10px;
 }
-.form input,
-.form button {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    outline: none;
-    border-style: none;
-}
-.form input, .form select {
+
+.form input[type="text"], .form input[type="email"], .form select {
     border: none;
     font-size: 16px;
     margin: 0;
