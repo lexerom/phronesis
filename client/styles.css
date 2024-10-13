@@ -133,7 +133,7 @@ body {
     outline: none;
     border-style: none;
 }
-.form input {
+.form input, .form select {
     border: none;
     font-size: 16px;
     margin: 0;
