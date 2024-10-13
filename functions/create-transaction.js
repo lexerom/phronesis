@@ -10,7 +10,7 @@ const rebilly = RebillyAPI({
     organizationId: REBILLY_ORGANIZATION_ID,
 });
 
-exports.handler = async function (event, context) {
+exports.handler = async function (event, context, callback) {
     if (event.httpMethod !== 'POST') {
         return {
             statusCode: 405,
@@ -41,9 +41,12 @@ exports.handler = async function (event, context) {
             },
         });
 
-        return JSON.stringify({
-            transaction,
-        });
+        return {
+            statusCode: 200,
+            body: JSON.stringify({
+                transaction,
+            }),
+        };
     } catch (error) {
         const message = error.details ?? "Internal Server Error";
         const code = error.status ?? 500;
