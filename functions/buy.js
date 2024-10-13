@@ -23,7 +23,7 @@ exports.handler = async function (event, context) {
                     quantity: 1,
                 }
             ],
-        }
+        },
         expand: 'recentInvoice'
     }).then((res) => Response.redirect(res._embedded.recentInvoice.paymentFormUrl, 303))
 };

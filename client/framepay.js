@@ -36,12 +36,12 @@ form.onsubmit = async function (e) {
             body: JSON.stringify(purchase),
         });
 
-        const transaction = await response.json();
+        const transaction = (await response.json()).transaction;
         const approvalUrl = transaction?._links.find(({rel}) => rel === "approvalUrl");
         if (approvalUrl) {
             window.location = approvalUrl.href;
         } else {
-            window.location = "/thank-you.html";
+            window.location.reload();
         }
     } catch (error) {
         console.log('❌ Create token error:', error);
