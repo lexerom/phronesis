@@ -24,6 +24,8 @@ exports.handler = async function (event, context, callback) {
             billingAddress: primaryAddress,
             currency,
             amount,
+            replays,
+            partners,
         } = JSON.parse(event.body);
         const { fields: customer } = await rebilly.customers.create({
             data: {
@@ -38,6 +40,10 @@ exports.handler = async function (event, context, callback) {
                 customerId: customer.id,
                 currency,
                 amount,
+                customFields: {
+                    Replays: replays,
+                    'Partner-name-1': JSON.stringify(partners),
+                },
             },
         });
 

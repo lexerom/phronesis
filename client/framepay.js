@@ -61,11 +61,23 @@ form.onsubmit = async function (e) {
         // Use this paymentToken in your subsequent Rebilly API calls to complete your checkout process
         console.log(paymentToken);
 
+        let partnerValues = [];
+        if (partners.checked) {
+            for (let i = 1; i <= numberOfPartners.value; i++) {
+                partnerValues.push({
+                    name: document.querySelector('#payment-form #partner-' + i.toString() + '-name').value,
+                    email: document.querySelector('#payment-form #partner-' + i.toString() + '-email').value,
+                });
+            }
+        }
+
         const purchase = {
             paymentToken,
             billingAddress,
             currency: 'USD',
             amount: calculateTotal(),
+            replays: replays.checked,
+            partners: partnerValues,
         };
 
         const response = await fetch('/.netlify/functions/create-transaction', {
