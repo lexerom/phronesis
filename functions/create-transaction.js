@@ -11,13 +11,20 @@ const rebilly = RebillyAPI({
 });
 
 exports.handler = async function (event, context) {
+    if (event.httpMethod !== 'POST') {
+        return {
+            statusCode: 405,
+            body: JSON.stringify({ error: 'Method Not Allowed' }),
+        };
+    }
+
     try {
         const {
             paymentToken,
             billingAddress: primaryAddress,
             currency,
             amount,
-        } = event.body;
+        } = JSON.parse(event.body);
         const { fields: customer } = await rebilly.customers.create({
             data: {
                 paymentToken,
