@@ -41,7 +41,7 @@ form.onsubmit = async function (e) {
         if (approvalUrl) {
             window.location = approvalUrl.href;
         } else {
-            window.location.reload();
+            window.location = '/thank-you.html';
         }
     } catch (error) {
         console.log('❌ Create token error:', error);
