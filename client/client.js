@@ -1,5 +1,5 @@
 const customerId = "cus_01J75YWQJ1MB7RDY74WT324C14";
-document.querySelector('main #deposit-button').onclick = async function (e) {
+document.querySelector('#app #deposit-button').onclick = async function (e) {
     e.target.disabled = true;
     const response = await fetch(
         "/.netlify/functions/deposit-11", {
