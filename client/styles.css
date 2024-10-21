@@ -156,6 +156,7 @@ footer {
     text-align: center;
     margin: 50px auto;
     min-height: 800px;
+    max-width: fit-content;
 }
 
 #app button {
