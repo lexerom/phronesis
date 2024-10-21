@@ -152,12 +152,12 @@ footer {
     margin: 0;
 }
 
-main {
+#app {
     text-align: center;
     margin: 50px auto;
     min-height: 800px;
 }
 
-main button {
+#app button {
     padding: 10px 20px;
 }
