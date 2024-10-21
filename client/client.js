@@ -13,7 +13,7 @@ document.querySelector('main #deposit-button').onclick = async function () {
 
     const {token, depositRequestId} = await response.json();
 
-    RebillyInstuments.mount({
+    RebillyInstruments.mount({
         apiMode: "sandbox",
         deposit: {
             depositRequestId,
