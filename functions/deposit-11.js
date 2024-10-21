@@ -18,7 +18,7 @@ exports.handler = async function (event, context, callback) {
         };
     }
 
-    const customerId = event.body.customerId;
+    const { customerId } = JSON.parse(event.body);
     const data = {
         mode: "passwordless",
         customerId,
