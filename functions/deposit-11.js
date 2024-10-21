@@ -18,10 +18,61 @@ exports.handler = async function (event, context, callback) {
         };
     }
 
+    const { customerId } = event.body.customerId;
+    const response = {};
+    const data = {
+        mode: "passwordless",
+        customerId,
+    };
+    const { fields: login } = await rebilly.customerAuthentication.login({
+        data,
+    });
+    const { fields: exchangeToken } =
+        await rebilly.customerAuthentication.exchangeToken({
+            token: login.token,
+            data: {
+                acl: [
+                    {
+                        scope: {
+                            organizationId: [REBILLY_ORGANIZATION_ID],
+                        },
+                        permissions: [
+                            "PostToken",
+                            "PostDigitalWalletValidation",
+                            "StorefrontGetAccount",
+                            "StorefrontPatchAccount",
+                            "StorefrontPostPayment",
+                            "StorefrontGetTransactionCollection",
+                            "StorefrontGetTransaction",
+                            "StorefrontGetPaymentInstrumentCollection",
+                            "StorefrontPostPaymentInstrument",
+                            "StorefrontGetPaymentInstrument",
+                            "StorefrontPatchPaymentInstrument",
+                            "StorefrontPostPaymentInstrumentDeactivation",
+                            "StorefrontGetWebsite",
+                            "StorefrontGetInvoiceCollection",
+                            "StorefrontGetInvoice",
+                            "StorefrontGetProductCollection",
+                            "StorefrontGetProduct",
+                            "StorefrontPostReadyToPay",
+                            "StorefrontGetPaymentInstrumentSetup",
+                            "StorefrontPostPaymentInstrumentSetup",
+                            "StorefrontGetDepositRequest",
+                            "StorefrontGetDepositStrategy",
+                            "StorefrontPostDeposit",
+                        ],
+                    },
+                ],
+                customClaims: {
+                    websiteId: REBILLY_WEBSITE_ID,
+                },
+            },
+        });
+
     try {
         const requestDepositData = {
             websiteId: REBILLY_WEBSITE_ID,
-            customerId: CUSTOMER_ID,
+            customerId: customerId,
             currency: "USD",
             strategyId: "dep_str_01JAAK5MKPX6D0RGHCBCPP4NW0",
         };
@@ -32,7 +83,8 @@ exports.handler = async function (event, context, callback) {
         return {
             statusCode: 200,
             body: JSON.stringify({
-                transaction,
+                depositRequestId: depositFields.id,
+                token: exchangeToken.token,
             }),
         };
     } catch (error) {

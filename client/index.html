@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Casino Page</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.rebilly.com/instruments/@latest/core.js" type="text/javascript"></script>
+    <script src="./client.js" defer></script>
 </head>
 <body>
 <!-- Header -->
@@ -31,7 +33,12 @@
 
 <!-- Main content goes here -->
 <main>
-    <button id="deposit-button">Make a deposit</button>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/WJI44OB_STM?si=OXWzdKeKYE6jfDPV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <div id="app">
+        <button id="deposit-button">Make a deposit</button>
+        <div class="rebilly-instruments-summary"></div>
+        <div class="rebilly-instruments"></div>
+    </div>
 </main>
 <!-- Footer -->
 <footer>
@@ -67,6 +74,5 @@
         <p>&copy; 2024 Casino. All rights reserved.</p>
     </div>
 </footer>
-<script type="application/javascript" src="client.js"></script>
 </body>
 </html>

@@ -151,3 +151,13 @@ footer {
 .footer-bottom p {
     margin: 0;
 }
+
+main {
+    text-align: center;
+    margin: 50px auto;
+    min-height: 800px;
+}
+
+main button {
+    padding: 10px 20px;
+}
